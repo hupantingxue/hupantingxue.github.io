@@ -3,19 +3,19 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: 湖畔听雪居
+subtitle: 'hupantingxue'
+description: '个人随笔，日后追忆'
 keywords:
-author: John Doe
-language: en
+author: hupantingxue
+language: zh-CN
 timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
-url: http://example.com
+url: http://hupantingxue.github.io
 root: /
-permalink: :year/:month/:day/:title/
+permalink: :category/:year/:month/:day/:title.html
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -103,4 +103,6 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repository: https://github.com/hupantingxue/hupantingxue.github.io.git
+  branch: master
