@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hupantingxue.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="背景最近上线了几个以wordpress搭建的内容型小程序，每天手动更新，既费事又费时，效率极其低下，于是计划用实现一套自动发布的程序。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wordpress自动发布文章">
+<meta property="og:url" content="http://hupantingxue.github.io/%E5%88%9B%E4%B8%9A/2020/11/05/wordpress%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0.html">
+<meta property="og:site_name" content="湖畔听雪居">
+<meta property="og:description" content="背景最近上线了几个以wordpress搭建的内容型小程序，每天手动更新，既费事又费时，效率极其低下，于是计划用实现一套自动发布的程序。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-05T13:08:35.000Z">
+<meta property="article:modified_time" content="2020-11-06T01:19:55.686Z">
+<meta property="article:author" content="hupantingxue">
+<meta property="article:tag" content="创业">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="自动化">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hupantingxue.github.io/%E5%88%9B%E4%B8%9A/2020/11/05/wordpress%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>wordpress自动发布文章 | 湖畔听雪居</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">湖畔听雪居</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">hupantingxue</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://hupantingxue.github.io/%E5%88%9B%E4%B8%9A/2020/11/05/wordpress%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hupantingxue">
+      <meta itemprop="description" content="个人随笔，日后追忆">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="湖畔听雪居">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          wordpress自动发布文章
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-05 21:08:35" itemprop="dateCreated datePublished" datetime="2020-11-05T21:08:35+08:00">2020-11-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-06 09:19:55" itemprop="dateModified" datetime="2020-11-06T09:19:55+08:00">2020-11-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%9B%E4%B8%9A/" itemprop="url" rel="index"><span itemprop="name">创业</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近上线了几个以wordpress搭建的内容型小程序，每天手动更新，既费事又费时，效率极其低下，于是计划用实现一套自动发布的程序。<a id="more"></a></p>
+<h2 id="技术尝试"><a href="#技术尝试" class="headerlink" title="技术尝试"></a>技术尝试</h2><h3 id="xmlrpc"><a href="#xmlrpc" class="headerlink" title="xmlrpc"></a>xmlrpc</h3><p>用wordpress的xmlrpc协议来发布文章，需要<br>1、 开启xmlrpc.php服务，wordpress 3.5以上版本自动支持；</p>
+<p>2、 安装 wordpress_xmlrpc 插件：</p>
+<blockquote>
+<p>pip install python-wordpress-xmlrpc</p>
+</blockquote>
+<p>3、 编写客户端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line">from wordpress_xmlrpc import Client, WordPressPost</span><br><span class="line">from wordpress_xmlrpc.methods.posts import GetPosts, NewPost</span><br><span class="line">from wordpress_xmlrpc.methods.users import GetUserInfo</span><br><span class="line">from wordpress_xmlrpc.methods import posts</span><br><span class="line">from wordpress_xmlrpc.methods import taxonomies</span><br><span class="line">from wordpress_xmlrpc import WordPressTerm</span><br><span class="line">from wordpress_xmlrpc.compat import xmlrpc_client</span><br><span class="line">from wordpress_xmlrpc.methods import media, posts</span><br><span class="line">import sys</span><br><span class="line">import conf</span><br><span class="line"></span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(&#39;utf-8&#39;)</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    connstr &#x3D; &quot;%s&#x2F;xmlrpc.php&quot; % (conf.WP_DOMAIN)</span><br><span class="line">    wp &#x3D; Client(connstr, conf.WP_ADMIN_USER, conf.WP_ADMIN_PWD)</span><br><span class="line"></span><br><span class="line">    idx &#x3D; 2</span><br><span class="line">    post &#x3D; WordPressPost()</span><br><span class="line">    post.title &#x3D; &quot;十万个冷知识第%d集&quot; % (idx)</span><br><span class="line">    post.content &#x3D; &#39;&#39;&#39;&lt;video src&#x3D;&quot;https:&#x2F;&#x2F;v.qq.com&#x2F;x&#x2F;cover&#x2F;keupp5sxcs53vlc&#x2F;j0173n2fwvd.html&quot; object-fit&#x3D;&quot;fill&quot; controls&#x3D;&quot;controls&quot; width&#x3D;&quot;250&quot; height&#x3D;&quot;180&quot; data-mce-fragment&#x3D;&quot;1&quot;&gt;&lt;&#x2F;video&gt;&#39;&#39;&#39;</span><br><span class="line">    post.post_status &#x3D; &#39;publish&#39;</span><br><span class="line">    post.terms_names &#x3D; &#123;</span><br><span class="line">        &#39;post_tag&#39;: [&#39;冷知识&#39;, &#39;十万个冷知识&#39;],</span><br><span class="line">        &#39;category&#39;: [&#39;科学&#39;]</span><br><span class="line">    &#125;</span><br><span class="line">    post.id &#x3D; wp.call(posts.NewPost(post))</span><br><span class="line"></span><br><span class="line">if &quot;__main__&quot; &#x3D;&#x3D; __name__:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>不知道是本地服务器问题，还是因为wordpress的xmlrpc协议开启失败，折腾了好几天，也没有成功，调用 xmlrpc validate 服务，一直返回 parse error。<br>在咨询了微慕的人之后，决定改用wordpress 的 REST API来发布文章。</p>
+<h3 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h3><h4 id="1-安装-Application-Passwords-插件"><a href="#1-安装-Application-Passwords-插件" class="headerlink" title="1.安装 Application Passwords 插件"></a>1.安装 Application Passwords 插件</h4><p>插件 -&gt; 搜索“Application Passwords” -&gt; 安装 -&gt; 启用插件</p>
+<h4 id="2-设置用户认证密码；"><a href="#2-设置用户认证密码；" class="headerlink" title="2.设置用户认证密码；"></a>2.设置用户认证密码；</h4><p>2.1 用户 -&gt; 添加用户<br>2.2 搜索新创建的用户，将角色配置为“编辑”<br>2.3 编辑用户信息，添加”Application Passwords”的密码，并保存好，后续在发送http包头的时候需要用到；</p>
+<h4 id="3-配置好验证头"><a href="#3-配置好验证头" class="headerlink" title="3. 配置好验证头"></a>3. 配置好验证头</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import base64</span><br><span class="line"></span><br><span class="line">credentials &#x3D; user + &#39;:&#39; + password</span><br><span class="line">token &#x3D; base64.b64encode(credentials.encode())</span><br><span class="line">header &#x3D; &#123;&#39;Authorization&#39;: &#39;Basic &#39; + token.decode(&#39;utf-8&#39;)&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-发布一个简单的post"><a href="#4-发布一个简单的post" class="headerlink" title="4. 发布一个简单的post"></a>4. 发布一个简单的post</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">url &#x3D; &quot;https:&#x2F;&#x2F;domain&#x2F;wp-json&#x2F;wp&#x2F;v2&#x2F;&quot;</span><br><span class="line">post &#x3D; &#123;</span><br><span class="line">         &#39;title&#39;    : vtitle,</span><br><span class="line">         &#39;status&#39;   : &#39;publish&#39;,</span><br><span class="line">         &#39;content&#39;  : content,</span><br><span class="line">         &#39;date&#39;   : pubtime</span><br><span class="line">        &#125;</span><br><span class="line">responce &#x3D; requests.post(url + &quot;&#x2F;posts&quot;, headers&#x3D;header, json&#x3D;post)</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-发布一个带有feature-image的post"><a href="#5-发布一个带有feature-image的post" class="headerlink" title="5. 发布一个带有feature image的post"></a>5. 发布一个带有feature image的post</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">def getImg(imgurl, vtitle):</span><br><span class="line">    #save image</span><br><span class="line">    imgfn &#x3D; &quot;images&#x2F;%d%d.jpg&quot; %(time.time(), random.randint(1000000, 9999999))</span><br><span class="line">    urllib.urlretrieve(imgurl, imgfn)</span><br><span class="line"></span><br><span class="line">    of &#x3D; open(imgfn, &#39;rb&#39;)</span><br><span class="line">    media &#x3D; &#123;</span><br><span class="line">        &#39;file&#39;: of,</span><br><span class="line">        &#39;caption&#39;: vtitle,</span><br><span class="line">        &#39;description&#39;: vtitle</span><br><span class="line">    &#125;</span><br><span class="line">    r &#x3D; requests.post(url + &#39;&#x2F;media&#39;, headers&#x3D;header, files&#x3D;media)</span><br><span class="line">    #print &quot;image resp: &quot;, r.status_code, &quot;\n&quot;, r.text</span><br><span class="line">    rbody &#x3D; json.loads(r.text)</span><br><span class="line">    imgID &#x3D; 0</span><br><span class="line">    if 201 &#x3D;&#x3D; r.status_code and &quot;id&quot; in rbody:</span><br><span class="line">        imgID &#x3D; rbody[&quot;id&quot;]</span><br><span class="line">    of.close()</span><br><span class="line">    return imgID</span><br><span class="line"></span><br><span class="line">post &#x3D; &#123;</span><br><span class="line">        &#39;title&#39;    : vtitle,</span><br><span class="line">        &#39;status&#39;   : &#39;publish&#39;,</span><br><span class="line">        &#39;content&#39;  : content,</span><br><span class="line">        &#39;featured_media&#39; : imgID,</span><br><span class="line">        &#39;date&#39;   : pubtime</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">responce &#x3D; requests.post(url + &quot;&#x2F;posts&quot;, headers&#x3D;header, json&#x3D;post)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-发布带有tag列表的post"><a href="#6-发布带有tag列表的post" class="headerlink" title="6. 发布带有tag列表的post"></a>6. 发布带有tag列表的post</h4><p>tag发布的时候，需要携带name、slug、description、meta这4个参数，其中description、meta这2个参数可以为空。<br>slug需要注意的一点是，它必须是经过url编码之后的，否则会报错，可以调用 <em>urllib.quote()</em> 函数来编码，反之也可以用  <em>urllib.unquote()</em> 来解码；<br>以下是根据tag名称来创建tag并返回tagid的一个函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">def getTags(taglist):</span><br><span class="line">    tagids &#x3D; []</span><br><span class="line">    for tag in taglist:</span><br><span class="line">        print tag</span><br><span class="line">        slug &#x3D; urllib.quote(tag.encode(&quot;utf-8&quot;))</span><br><span class="line">        tagjs &#x3D; &#123;&quot;description&quot;:&quot;&quot;, &quot;name&quot;:tag.encode(&quot;utf-8&quot;), &quot;meta&quot;:[], &quot;slug&quot;:slug&#125;</span><br><span class="line">        tagid &#x3D; 0</span><br><span class="line">        r &#x3D; requests.post(url + &quot;&#x2F;tags&quot;, headers&#x3D;header, json&#x3D;tagjs)</span><br><span class="line">        if 400 &#x3D;&#x3D; r.status_code:</span><br><span class="line">            rc &#x3D; json.loads(r.text)</span><br><span class="line">            tagid &#x3D; rc[&quot;data&quot;][&quot;term_id&quot;]</span><br><span class="line">        elif 201 &#x3D;&#x3D; r.status_code:</span><br><span class="line">            rc &#x3D; json.loads(r.text)</span><br><span class="line">            tagid &#x3D; rc[&quot;id&quot;]</span><br><span class="line">        else:</span><br><span class="line">            pass</span><br><span class="line">        if 0 !&#x3D; tagid:</span><br><span class="line">            tagids.append(tagid)</span><br><span class="line">    return tagids</span><br><span class="line">post &#x3D; &#123;</span><br><span class="line">         &#39;title&#39;    : vtitle,</span><br><span class="line">         &#39;status&#39;   : &#39;publish&#39;,</span><br><span class="line">         &#39;content&#39;  : content,</span><br><span class="line">         &#39;featured_media&#39; : imgID,</span><br><span class="line">         &#39;tags&#39; : tagIDs,</span><br><span class="line">         #&#39;categories&#39;: 5, category ID</span><br><span class="line">         &#39;date&#39;   : pubtime</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-中文分词"><a href="#7-中文分词" class="headerlink" title="7. 中文分词"></a>7. 中文分词</h4><p>一般根据采集的标题来生成tag，这就需要用到中文分词，本文用的是python的jieba库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import jieba</span><br><span class="line"></span><br><span class="line">tags &#x3D; jieba.cut_for_search(vtitle)</span><br><span class="line">    taglist &#x3D; []</span><br><span class="line">    for tag in tags:</span><br><span class="line">        if tag not in u&#39;！，“&lt;&gt;《》？、_-&#39;:</span><br><span class="line">            #print tag</span><br><span class="line">            taglist.append(tag)</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-完整代码"><a href="#8-完整代码" class="headerlink" title="8. 完整代码"></a>8. 完整代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line">#-*- coding:utf-8 -*-</span><br><span class="line"></span><br><span class="line">import requests</span><br><span class="line">import json</span><br><span class="line">import base64</span><br><span class="line">import time</span><br><span class="line">import random</span><br><span class="line">import urllib</span><br><span class="line">#中文分词</span><br><span class="line">import jieba</span><br><span class="line">import re</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">url &#x3D; conf.URL</span><br><span class="line">user &#x3D; conf.USER</span><br><span class="line">password &#x3D; conf.PASSWORD</span><br><span class="line"></span><br><span class="line">credentials &#x3D; user + &#39;:&#39; + password</span><br><span class="line">token &#x3D; base64.b64encode(credentials.encode())</span><br><span class="line">header &#x3D; &#123;&#39;Authorization&#39;: &#39;Basic &#39; + token.decode(&#39;utf-8&#39;)&#125;</span><br><span class="line"></span><br><span class="line">def getTags(taglist):</span><br><span class="line">    tagids &#x3D; []</span><br><span class="line">    for tag in taglist:</span><br><span class="line">        print tag</span><br><span class="line">        slug &#x3D; urllib.quote(tag.encode(&quot;utf-8&quot;))</span><br><span class="line">        tagjs &#x3D; &#123;&quot;description&quot;:&quot;&quot;, &quot;name&quot;:tag.encode(&quot;utf-8&quot;), &quot;meta&quot;:[], &quot;slug&quot;:slug&#125;</span><br><span class="line">        tagid &#x3D; 0</span><br><span class="line">        r &#x3D; requests.post(url + &quot;&#x2F;tags&quot;, headers&#x3D;header, json&#x3D;tagjs)</span><br><span class="line">        if 400 &#x3D;&#x3D; r.status_code:</span><br><span class="line">            rc &#x3D; json.loads(r.text)</span><br><span class="line">            tagid &#x3D; rc[&quot;data&quot;][&quot;term_id&quot;]</span><br><span class="line">        elif 201 &#x3D;&#x3D; r.status_code:</span><br><span class="line">            rc &#x3D; json.loads(r.text)</span><br><span class="line">            tagid &#x3D; rc[&quot;id&quot;]</span><br><span class="line">        else:</span><br><span class="line">            pass</span><br><span class="line">        if 0 !&#x3D; tagid:</span><br><span class="line">            tagids.append(tagid)</span><br><span class="line">    return tagids</span><br><span class="line"></span><br><span class="line">def getImg(imgurl, vtitle):</span><br><span class="line">    #save image</span><br><span class="line">    imgfn &#x3D; &quot;images&#x2F;%d%d.jpg&quot; %(time.time(), random.randint(1000000, 9999999))</span><br><span class="line">    urllib.urlretrieve(imgurl, imgfn)</span><br><span class="line"></span><br><span class="line">    of &#x3D; open(imgfn, &#39;rb&#39;)</span><br><span class="line">    media &#x3D; &#123;</span><br><span class="line">        &#39;file&#39;: of,</span><br><span class="line">        &#39;caption&#39;: vtitle,</span><br><span class="line">        &#39;description&#39;: vtitle</span><br><span class="line">    &#125;</span><br><span class="line">    r &#x3D; requests.post(url + &#39;&#x2F;media&#39;, headers&#x3D;header, files&#x3D;media)</span><br><span class="line">    #print &quot;image resp: &quot;, r.status_code, &quot;\n&quot;, r.text</span><br><span class="line">    rbody &#x3D; json.loads(r.text)</span><br><span class="line">    imgID &#x3D; 0</span><br><span class="line">    if 201 &#x3D;&#x3D; r.status_code and &quot;id&quot; in rbody:</span><br><span class="line">        imgID &#x3D; rbody[&quot;id&quot;]</span><br><span class="line">    of.close()</span><br><span class="line">    return imgID</span><br><span class="line"></span><br><span class="line">def pubPost(imgurl, vtitle, vurl):</span><br><span class="line">print &quot;imgurl:%s|vtitle:%s|vurl:%s&quot; %(imgurl, vtitle, vurl)</span><br><span class="line">    imgID &#x3D; 0</span><br><span class="line"></span><br><span class="line">    if &quot;&quot; !&#x3D; imgurl:</span><br><span class="line">        imgID &#x3D; getImg(imgurl, vtitle)</span><br><span class="line">        if 0 &#x3D;&#x3D; imgID:</span><br><span class="line">            print &quot;image is null, then exit&quot;</span><br><span class="line">            return -1</span><br><span class="line">        else:</span><br><span class="line">            print &quot;image id:&quot;, imgID</span><br><span class="line"></span><br><span class="line">    pubtime &#x3D; time.strftime(&quot;%Y-%m-%dT%H:%M:%S&quot;, time.localtime())</span><br><span class="line">    # https:&#x2F;&#x2F;developer.wordpress.org&#x2F;rest-api&#x2F;reference&#x2F;posts&#x2F;</span><br><span class="line">    content &#x3D; &#39;&lt;video src&#x3D;&quot;%s&quot; object-fit&#x3D;&quot;fill&quot; controls&#x3D;&quot;controls&quot; width&#x3D;&quot;250&quot; height&#x3D;&quot;180&quot; data-mce-fragment&#x3D;&quot;1&quot;&gt;&lt;&#x2F;video&gt;&#39; % vurl</span><br><span class="line"></span><br><span class="line">    tags &#x3D; jieba.cut_for_search(vtitle)</span><br><span class="line">    taglist &#x3D; []</span><br><span class="line">    for tag in tags:</span><br><span class="line">        if tag not in u&#39;！，“&lt;&gt;《》？、_-&#39;:</span><br><span class="line">            #print tag</span><br><span class="line">            taglist.append(tag)</span><br><span class="line"></span><br><span class="line">    tagIDs &#x3D; getTags(taglist)</span><br><span class="line">    print tagIDs</span><br><span class="line">    #return -3</span><br><span class="line"></span><br><span class="line">    if 0 !&#x3D; imgID:</span><br><span class="line">        post &#x3D; &#123;</span><br><span class="line">             &#39;title&#39;    : vtitle,</span><br><span class="line">             &#39;status&#39;   : &#39;publish&#39;,</span><br><span class="line">             &#39;content&#39;  : content,</span><br><span class="line">             &#39;featured_media&#39; : imgID,</span><br><span class="line">             &#39;tags&#39; : tagIDs,</span><br><span class="line">             #&#39;categories&#39;: 5, category ID</span><br><span class="line">             &#39;date&#39;   : pubtime</span><br><span class="line">            &#125;</span><br><span class="line">     else:</span><br><span class="line">        post &#x3D; &#123;</span><br><span class="line">             &#39;title&#39;    : vtitle,</span><br><span class="line">             &#39;status&#39;   : &#39;publish&#39;,</span><br><span class="line">             &#39;content&#39;  : content,</span><br><span class="line">             &#39;tags&#39; : tagIDs,</span><br><span class="line">             #&#39;categories&#39;: 5, category ID</span><br><span class="line">             &#39;date&#39;   : pubtime</span><br><span class="line">            &#125;</span><br><span class="line">    responce &#x3D; requests.post(url + &quot;&#x2F;posts&quot;, headers&#x3D;header, json&#x3D;post)</span><br><span class="line">    print(responce.text)</span><br><span class="line"></span><br><span class="line">def main(fn):</span><br><span class="line">    with open(fn) as f:</span><br><span class="line">        item &#x3D; &#123;&#125;</span><br><span class="line">        arr &#x3D; []</span><br><span class="line">        for line in f:</span><br><span class="line">            if &quot;href&quot; in line:</span><br><span class="line">                urls &#x3D; re.findall(r&quot;href&#x3D;\&quot;(.+?)html&quot;, line)</span><br><span class="line">                if 0 &lt; len(urls):</span><br><span class="line">                    url &#x3D; urls[0]</span><br><span class="line">                else:</span><br><span class="line">                    continue</span><br><span class="line">                ss &#x3D; &quot;%shtml&quot; %(url)</span><br><span class="line">                item[&quot;url&quot;] &#x3D; ss</span><br><span class="line">                item[&quot;pic&quot;] &#x3D; &quot;&quot;</span><br><span class="line">            #if &quot;episodeNumber&quot; in line:</span><br><span class="line">                titles &#x3D; re.findall(r&quot;&gt;(.+?)&lt;&quot;, line)</span><br><span class="line">                print titles</span><br><span class="line">                if 1 &lt; len(titles):</span><br><span class="line">                    title &#x3D; titles[1]</span><br><span class="line">                else:</span><br><span class="line">                    continue</span><br><span class="line">                ss &#x3D; &quot;十万个冷知识第%s集&quot; % title</span><br><span class="line">                item[&quot;title&quot;] &#x3D; ss</span><br><span class="line">            #if &quot;pic&quot; in item:</span><br><span class="line">                arr.append(item)</span><br><span class="line">                item &#x3D; &#123;&#125;</span><br><span class="line"></span><br><span class="line">        ii &#x3D; 0</span><br><span class="line">        for aa in arr:</span><br><span class="line">            #print &#39;&lt;video src&#x3D;&quot;%s&quot; object-fit&#x3D;&quot;fill&quot; controls&#x3D;&quot;controls&quot; width&#x3D;&quot;250&quot; height&#x3D;&quot;180&quot; data-mce-fragment&#x3D;&quot;1&quot;&gt;&lt;&#x2F;video&gt;&#39; % aa[&quot;url&quot;]</span><br><span class="line">            #print aa[&quot;url&quot;]</span><br><span class="line">            #print aa[&quot;pic&quot;]</span><br><span class="line">            #print aa</span><br><span class="line">            vurl &#x3D; aa[&quot;url&quot;]</span><br><span class="line">            vtitle &#x3D; aa[&quot;title&quot;]</span><br><span class="line">            imgurl &#x3D; aa[&quot;pic&quot;]</span><br><span class="line">            print &quot;第%d次循环: url(%s)|title(%s)|img(%s)&quot; % (ii, vurl, vtitle, imgurl)</span><br><span class="line">            pubPost(imgurl, aa[&quot;title&quot;], vurl)</span><br><span class="line">            ii &#x3D; ii + 1</span><br><span class="line"></span><br><span class="line">if &quot;__main__&quot; &#x3D;&#x3D; __name__:</span><br><span class="line">    if (2 &gt; len(sys.argv)):</span><br><span class="line">        print &quot;Usage: %s &lt;txt&gt;&quot; % (sys.argv[0])</span><br><span class="line">        sys.exit(-1)</span><br><span class="line"></span><br><span class="line">    main(sys.argv[1])</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h4><p><a target="_blank" rel="noopener" href="https://developer.wordpress.org/rest-api/">wordpress rest api官方文档</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=AS6EPzDyjhA">网友视频教程：用REST API发布POST</a><br><a target="_blank" rel="noopener" href="https://www.52nlp.cn/python%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E5%B7%A5%E5%85%B7-%E5%90%88%E9%9B%86-%E5%88%86%E8%AF%8D%E5%AE%89%E8%A3%85-%E5%88%86%E8%AF%8D%E4%BD%BF%E7%94%A8-%E5%88%86%E8%AF%8D%E6%B5%8B%E8%AF%95">Python中文分词工具大合集：安装、使用和测试</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%88%9B%E4%B8%9A/" rel="tag"># 创业</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+              <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag"># 自动化</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/%E5%88%9B%E4%B8%9A/2020/10/12/%E4%B8%80%E4%BA%9B%E6%84%9F%E6%85%A8.html" rel="next" title="一些感慨">
+      一些感慨 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E5%B0%9D%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">技术尝试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xmlrpc"><span class="nav-number">2.1.</span> <span class="nav-text">xmlrpc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REST-API"><span class="nav-number">2.2.</span> <span class="nav-text">REST API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85-Application-Passwords-%E6%8F%92%E4%BB%B6"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.安装 Application Passwords 插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E5%AF%86%E7%A0%81%EF%BC%9B"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.设置用户认证密码；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE%E5%A5%BD%E9%AA%8C%E8%AF%81%E5%A4%B4"><span class="nav-number">2.2.3.</span> <span class="nav-text">3. 配置好验证头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84post"><span class="nav-number">2.2.4.</span> <span class="nav-text">4. 发布一个简单的post</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AA%E5%B8%A6%E6%9C%89feature-image%E7%9A%84post"><span class="nav-number">2.2.5.</span> <span class="nav-text">5. 发布一个带有feature image的post</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E5%8F%91%E5%B8%83%E5%B8%A6%E6%9C%89tag%E5%88%97%E8%A1%A8%E7%9A%84post"><span class="nav-number">2.2.6.</span> <span class="nav-text">6. 发布带有tag列表的post</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D"><span class="nav-number">2.2.7.</span> <span class="nav-text">7. 中文分词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.8.</span> <span class="nav-text">8. 完整代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="nav-number">2.2.9.</span> <span class="nav-text">相关资料</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hupantingxue</p>
+  <div class="site-description" itemprop="description">个人随笔，日后追忆</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hupantingxue</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='120,120,120' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
